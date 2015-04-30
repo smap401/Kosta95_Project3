@@ -1,0 +1,102 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<html>
+<head>
+<title>로그인 페이지</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="style/ico/favicon.ico">
+
+    <title>NYC - Design Studio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="style/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="style/css/style.css" rel="stylesheet">
+    <link href="style/css/font-awesome.min.css" rel="stylesheet">
+    <link href="style/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+
+</head>
+<body>
+<center>
+	 <div id="contactwrap">
+		<div class="container">
+			<div class="row">
+	 <div class="col-lg-6">
+		<form role="form" name="loginform" action="<%= request.getContextPath()%>/MemberLoginAction.me" method="post">
+			<div class="form-group">
+				<h3>로그인 페이지</h3>
+				<label for="InputId">Your ID</label>
+				<input type="text" class="form-control" id="InputId" placeholder="Enter id">
+				<label for="InputPwd">Password</label>
+				<input type="password" class="form-control" id="InputPwd" placeholder="Enter pwd">
+			</div>
+			<button type="submit" class="btn btn-default">Login</button>
+			<!-- <a href="javascript:loginform.submit()">로그인</a>&nbsp;&nbsp;
+			<a href="MemberJoin.me">회원가입</a> -->
+		</form>
+	</div>
+	</div><! --/row -->
+		</div><!-- /container -->
+	</div>
+	
+<%-- <form name="loginform" action="<%= request.getContextPath()%>/MemberLoginAction.me" method="post">
+<center>
+<table border=1>
+	<!-- <div class="col-lg-6" align="center">
+					<form role="form" name="loginform" action="<%= request.getContextPath()%>/MemberLoginAction.me" method="post">>
+					  <div class="form-group">
+					    <label for="exampleInputName1">Your Name</label>
+					    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+					    <label for="exampleInputEmail1">Email address</label>
+					    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+					    <label for="exampleInputText1">Message</label>
+					    <textarea class="form-control" rows="3"></textarea>
+					  </div>
+					  <button type="submit" class="btn btn-default">Submit</button>
+					</form>
+				</div>
+	
+	<tr> -->
+		<td colspan="2" align=center>
+			<b><font size=5>로그인 페이지</font></b>
+		</td>
+	</tr>
+	<tr><td>아이디 : </td><td><input type="text" name="userid"/></td></tr>
+	<tr><td>비밀번호 : </td><td><input type="password" name="pwd"/></td></tr>
+	<tr>
+		<td colspan="2" align=center>
+			<a href="javascript:loginform.submit()">로그인</a>&nbsp;&nbsp;
+			<a href="MemberJoin.me">회원가입</a>
+		</td>
+	</tr>
+</table> --%>
+
+</center>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="style/js/classie.js"></script>
+    <script src="style/js/bootstrap.min.js"></script>
+    <script src="style/js/smoothscroll.js"></script>
+	<script src="style/js/jquery.stellar.min.js"></script>
+	<script src="style/js/fancybox/jquery.fancybox.js"></script>    
+	<script src="style/js/main.js"></script>
+		<script>
+		$(function(){
+			$.stellar({
+				horizontalScrolling: false,
+				verticalOffset: 40
+			});
+		});
+		</script>
+		
+		<script type="text/javascript">
+      $(function() {
+        //    fancybox
+          jQuery(".fancybox").fancybox();
+      });
+	   </script>
+</body>
+</html>

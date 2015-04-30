@@ -1,0 +1,703 @@
+/* 게시판 */
+CREATE TABLE BOARD (
+	idx NUMBER NOT NULL, /* 글번호 */
+	subject VARCHAR2(50) NOT NULL, /* 글제목 */
+	count NUMBER DEFAULT 0, /* 조회수 */
+	content VARCHAR2(1000) NOT NULL, /* 글내용 */
+	writedate DATE DEFAULT Sysdate, /* 작성일 */
+	filename VARCHAR2(30), /* 파일명 */
+	filesize NUMBER, /* 파일용량 */
+	refer NUMBER DEFAULT 0, /* 그룹번호 */
+	depth NUMBER DEFAULT 0, /* 들여쓰기 */
+	step NUMBER DEFAULT 0, /* 정렬순서 */
+	userid_fk VARCHAR2(20) /* 아이디 */
+);
+
+COMMENT ON TABLE BOARD IS '게시판';
+
+COMMENT ON COLUMN BOARD.idx IS '글번호';
+
+COMMENT ON COLUMN BOARD.subject IS '글제목';
+
+COMMENT ON COLUMN BOARD.count IS '조회수';
+
+COMMENT ON COLUMN BOARD.content IS '글내용';
+
+COMMENT ON COLUMN BOARD.writedate IS '작성일';
+
+COMMENT ON COLUMN BOARD.filename IS '파일명';
+
+COMMENT ON COLUMN BOARD.filesize IS '파일용량';
+
+COMMENT ON COLUMN BOARD.refer IS '그룹번호';
+
+COMMENT ON COLUMN BOARD.depth IS '들여쓰기';
+
+COMMENT ON COLUMN BOARD.step IS '정렬순서';
+
+COMMENT ON COLUMN BOARD.userid_fk IS '아이디';
+
+CREATE UNIQUE INDEX PK_BOARD
+	ON BOARD (
+		idx ASC
+	);
+
+ALTER TABLE BOARD
+	ADD
+		CONSTRAINT PK_BOARD
+		PRIMARY KEY (
+			idx
+		);
+
+/* 댓글 */
+CREATE TABLE B_COMMENT (
+	co_idx NUMBER NOT NULL, /* 댓글번호 */
+	co_content VARCHAR2(50) NOT NULL, /* 댓글내용 */
+	co_writedate DATE DEFAULT Sysdate, /* 작성일 */
+	userid_fk VARCHAR2(20), /* 아이디 */
+	idx_fk NUMBER /* 글번호 */
+);
+
+COMMENT ON TABLE B_COMMENT IS '댓글';
+
+COMMENT ON COLUMN B_COMMENT.co_idx IS '댓글번호';
+
+COMMENT ON COLUMN B_COMMENT.co_content IS '댓글내용';
+
+COMMENT ON COLUMN B_COMMENT.co_writedate IS '작성일';
+
+COMMENT ON COLUMN B_COMMENT.userid_fk IS '아이디';
+
+COMMENT ON COLUMN B_COMMENT.idx_fk IS '글번호';
+
+CREATE UNIQUE INDEX PK_B_COMMENT
+	ON B_COMMENT (
+		co_idx ASC
+	);
+
+ALTER TABLE B_COMMENT
+	ADD
+		CONSTRAINT PK_B_COMMENT
+		PRIMARY KEY (
+			co_idx
+		);
+
+/* 회원 */
+CREATE TABLE MEMBER (
+	userid VARCHAR2(20) NOT NULL, /* 아이디 */
+	name VARCHAR2(20) NOT NULL, /* 이름 */
+	pwd VARCHAR2(20) NOT NULL, /* 비밀번호 */
+	phone NUMBER NOT NULL, /* 핸드폰번호 */
+	email VARCHAR2(30) NOT NULL, /* 이메일 */
+	joindate DATE DEFAULT Sysdate, /* 가입일 */
+	team_no_fk NUMBER /* 구단번호 */
+);
+
+COMMENT ON TABLE MEMBER IS '회원';
+
+COMMENT ON COLUMN MEMBER.userid IS '아이디';
+
+COMMENT ON COLUMN MEMBER.name IS '이름';
+
+COMMENT ON COLUMN MEMBER.pwd IS '비밀번호';
+
+COMMENT ON COLUMN MEMBER.phone IS '핸드폰번호';
+
+COMMENT ON COLUMN MEMBER.email IS '이메일';
+
+COMMENT ON COLUMN MEMBER.joindate IS '가입일';
+
+COMMENT ON COLUMN MEMBER.team_no_fk IS '구단번호';
+
+CREATE UNIQUE INDEX PK_MEMBER
+	ON MEMBER (
+		userid ASC
+	);
+
+ALTER TABLE MEMBER
+	ADD
+		CONSTRAINT PK_MEMBER
+		PRIMARY KEY (
+			userid
+		);
+
+/* 구단 */
+CREATE TABLE TEAM (
+	team_no NUMBER NOT NULL, /* 구단번호 */
+	team_name VARCHAR2(20) NOT NULL /* 구단명 */
+);
+
+COMMENT ON TABLE TEAM IS '구단';
+
+COMMENT ON COLUMN TEAM.team_no IS '구단번호';
+
+COMMENT ON COLUMN TEAM.team_name IS '구단명';
+
+CREATE UNIQUE INDEX PK_TEAM
+	ON TEAM (
+		team_no ASC
+	);
+
+ALTER TABLE TEAM
+	ADD
+		CONSTRAINT PK_TEAM
+		PRIMARY KEY (
+			team_no
+		);
+
+/* 갤러리 */
+CREATE TABLE GALLERY (
+	gal_idx NUMBER NOT NULL, /* 글번호 */
+	gal_thumbsup NUMBER DEFAULT 0, /* 추천수 */
+	gal_writedate DATE DEFAULT Sysdate, /* 작성일 */
+	gal_content VARCHAR2(1000), /* 글내용 */
+	gal_filename VARCHAR2(30), /* 파일명 */
+	gal_filesize NUMBER, /* 파일용량 */
+	userid_fk VARCHAR2(20) /* 아이디 */
+);
+
+COMMENT ON TABLE GALLERY IS '갤러리';
+
+COMMENT ON COLUMN GALLERY.gal_idx IS '글번호';
+
+COMMENT ON COLUMN GALLERY.gal_thumbsup IS '추천수';
+
+COMMENT ON COLUMN GALLERY.gal_writedate IS '작성일';
+
+COMMENT ON COLUMN GALLERY.gal_content IS '글내용';
+
+COMMENT ON COLUMN GALLERY.gal_filename IS '파일명';
+
+COMMENT ON COLUMN GALLERY.gal_filesize IS '파일용량';
+
+COMMENT ON COLUMN GALLERY.userid_fk IS '아이디';
+
+CREATE UNIQUE INDEX PK_GALLERY
+	ON GALLERY (
+		gal_idx ASC
+	);
+
+ALTER TABLE GALLERY
+	ADD
+		CONSTRAINT PK_GALLERY
+		PRIMARY KEY (
+			gal_idx
+		);
+
+/* 갤러리댓글 */
+CREATE TABLE G_COMMENT (
+	gal_co_idx NUMBER NOT NULL, /* 댓글번호 */
+	gal_co_content VARCHAR2(50) NOT NULL, /* 댓글내용 */
+	gal_co_writedate DATE DEFAULT Sysdate, /* 작성일 */
+	userid_fk VARCHAR2(20), /* 아이디 */
+	gal_idx_fk NUMBER /* 글번호 */
+);
+
+COMMENT ON TABLE G_COMMENT IS '갤러리댓글';
+
+COMMENT ON COLUMN G_COMMENT.gal_co_idx IS '댓글번호';
+
+COMMENT ON COLUMN G_COMMENT.gal_co_content IS '댓글내용';
+
+COMMENT ON COLUMN G_COMMENT.gal_co_writedate IS '작성일';
+
+COMMENT ON COLUMN G_COMMENT.userid_fk IS '아이디';
+
+COMMENT ON COLUMN G_COMMENT.gal_idx_fk IS '글번호';
+
+CREATE UNIQUE INDEX PK_G_COMMENT
+	ON G_COMMENT (
+		gal_co_idx ASC
+	);
+
+ALTER TABLE G_COMMENT
+	ADD
+		CONSTRAINT PK_G_COMMENT
+		PRIMARY KEY (
+			gal_co_idx
+		);
+
+/* 역할 */
+CREATE TABLE ROLES (
+	grade NUMBER NOT NULL, /* 권한등급 */
+	authority VARCHAR2(20) NOT NULL /* 권한이름 */
+);
+
+COMMENT ON TABLE ROLES IS '역할';
+
+COMMENT ON COLUMN ROLES.grade IS '권한등급';
+
+COMMENT ON COLUMN ROLES.authority IS '권한이름';
+
+CREATE UNIQUE INDEX PK_ROLES
+	ON ROLES (
+		grade ASC
+	);
+
+ALTER TABLE ROLES
+	ADD
+		CONSTRAINT PK_ROLES
+		PRIMARY KEY (
+			grade
+		);
+
+/* 회원권한 */
+CREATE TABLE AUTHORITIES (
+	userid VARCHAR2(20) NOT NULL, /* 아이디 */
+	grade NUMBER NOT NULL /* 권한등급 */
+);
+
+COMMENT ON TABLE AUTHORITIES IS '회원권한';
+
+COMMENT ON COLUMN AUTHORITIES.userid IS '아이디';
+
+COMMENT ON COLUMN AUTHORITIES.grade IS '권한등급';
+
+CREATE UNIQUE INDEX PK_AUTHORITIES
+	ON AUTHORITIES (
+		userid ASC,
+		grade ASC
+	);
+
+ALTER TABLE AUTHORITIES
+	ADD
+		CONSTRAINT PK_AUTHORITIES
+		PRIMARY KEY (
+			userid,
+			grade
+		);
+
+/* 타자 */
+CREATE TABLE BATTER (
+	b_backnumber NUMBER NOT NULL, /* 등번호 */
+	team_no_fk NUMBER NOT NULL, /* 구단번호 */
+	b_name VARCHAR2(20), /* 이름 */
+	atbat NUMBER, /* 타석 */
+	hit NUMBER, /* 안타 */
+	homerun NUMBER, /* 홈런 */
+	battingavg FLOAT /* 타율 */
+);
+
+COMMENT ON TABLE BATTER IS '타자';
+
+COMMENT ON COLUMN BATTER.b_backnumber IS '등번호';
+
+COMMENT ON COLUMN BATTER.team_no_fk IS '구단번호';
+
+COMMENT ON COLUMN BATTER.b_name IS '이름';
+
+COMMENT ON COLUMN BATTER.atbat IS '타석';
+
+COMMENT ON COLUMN BATTER.hit IS '안타';
+
+COMMENT ON COLUMN BATTER.homerun IS '홈런';
+
+COMMENT ON COLUMN BATTER.battingavg IS '타율';
+
+CREATE UNIQUE INDEX PK_BATTER
+	ON BATTER (
+		b_backnumber ASC,
+		team_no_fk ASC
+	);
+
+ALTER TABLE BATTER
+	ADD
+		CONSTRAINT PK_BATTER
+		PRIMARY KEY (
+			b_backnumber,
+			team_no_fk
+		);
+
+/* 투수 */
+CREATE TABLE PITCHER (
+	p_backnumber NUMBER NOT NULL, /* 등번호 */
+	team_no_fk NUMBER NOT NULL, /* 구단번호 */
+	p_name VARCHAR2(20), /* 이름 */
+	win NUMBER, /* 승 */
+	lose NUMBER, /* 패 */
+	save NUMBER, /* 세이브 */
+	inning FLOAT, /* 이닝 */
+	era FLOAT /* 평균자책 */
+);
+
+COMMENT ON TABLE PITCHER IS '투수';
+
+COMMENT ON COLUMN PITCHER.p_backnumber IS '등번호';
+
+COMMENT ON COLUMN PITCHER.team_no_fk IS '구단번호';
+
+COMMENT ON COLUMN PITCHER.p_name IS '이름';
+
+COMMENT ON COLUMN PITCHER.win IS '승';
+
+COMMENT ON COLUMN PITCHER.lose IS '패';
+
+COMMENT ON COLUMN PITCHER.save IS '세이브';
+
+COMMENT ON COLUMN PITCHER.inning IS '이닝';
+
+COMMENT ON COLUMN PITCHER.era IS '평균자책';
+
+CREATE UNIQUE INDEX PK_PITCHER
+	ON PITCHER (
+		p_backnumber ASC,
+		team_no_fk ASC
+	);
+
+ALTER TABLE PITCHER
+	ADD
+		CONSTRAINT PK_PITCHER
+		PRIMARY KEY (
+			p_backnumber,
+			team_no_fk
+		);
+
+/* 문자중계 */
+CREATE TABLE TEXTLIVE (
+	gamenum NUMBER NOT NULL, /* 경기번호 */
+	bangnum NUMBER NOT NULL, /* 방번호 */
+	userid_fk VARCHAR2(20) NOT NULL /* 아이디 */
+);
+
+COMMENT ON TABLE TEXTLIVE IS '문자중계';
+
+COMMENT ON COLUMN TEXTLIVE.gamenum IS '경기번호';
+
+COMMENT ON COLUMN TEXTLIVE.bangnum IS '방번호';
+
+COMMENT ON COLUMN TEXTLIVE.userid_fk IS '아이디';
+
+CREATE UNIQUE INDEX PK_TEXTLIVE
+	ON TEXTLIVE (
+		gamenum ASC
+	);
+
+ALTER TABLE TEXTLIVE
+	ADD
+		CONSTRAINT PK_TEXTLIVE
+		PRIMARY KEY (
+			gamenum
+		);
+
+/* 실시간기록 */
+CREATE TABLE RECORD (
+	gamenum NUMBER NOT NULL, /* 경기번호 */
+	writedate DATE DEFAULT Sysdate NOT NULL, /* 작성시간 */
+	inning NUMBER, /* 이닝 */
+	r_pitcher VARCHAR2(20), /* 투수 */
+	r_batter VARCHAR2(20), /* 타자 */
+	goo NUMBER, /* 공개수 */
+	goocontent VARCHAR2(30) /* 내용 */
+);
+
+COMMENT ON TABLE RECORD IS '실시간기록';
+
+COMMENT ON COLUMN RECORD.gamenum IS '경기번호';
+
+COMMENT ON COLUMN RECORD.writedate IS '작성시간';
+
+COMMENT ON COLUMN RECORD.inning IS '이닝';
+
+COMMENT ON COLUMN RECORD.r_pitcher IS '투수';
+
+COMMENT ON COLUMN RECORD.r_batter IS '타자';
+
+COMMENT ON COLUMN RECORD.goo IS '공개수';
+
+COMMENT ON COLUMN RECORD.goocontent IS '내용';
+
+CREATE UNIQUE INDEX PK_RECORD
+	ON RECORD (
+		gamenum ASC,
+		writedate ASC
+	);
+
+ALTER TABLE RECORD
+	ADD
+		CONSTRAINT PK_RECORD
+		PRIMARY KEY (
+			gamenum,
+			writedate
+		);
+
+/* 스코어보드 */
+CREATE TABLE SCOREBOARD (
+	homescore NUMBER, /* 홈팀점수 */
+	awayscore NUMBER, /* 어웨이점수 */
+	ball NUMBER, /* 볼 */
+	strike NUMBER, /* 스트라이크 */
+	out NUMBER, /* 아웃 */
+	onbase NUMBER /* 출루상황 */
+);
+
+COMMENT ON TABLE SCOREBOARD IS '스코어보드';
+
+COMMENT ON COLUMN SCOREBOARD.homescore IS '홈팀점수';
+
+COMMENT ON COLUMN SCOREBOARD.awayscore IS '어웨이점수';
+
+COMMENT ON COLUMN SCOREBOARD.ball IS '볼';
+
+COMMENT ON COLUMN SCOREBOARD.strike IS '스트라이크';
+
+COMMENT ON COLUMN SCOREBOARD.out IS '아웃';
+
+COMMENT ON COLUMN SCOREBOARD.onbase IS '출루상황';
+
+ALTER TABLE BOARD
+	ADD
+		CONSTRAINT FK_MEMBER_TO_BOARD
+		FOREIGN KEY (
+			userid_fk
+		)
+		REFERENCES MEMBER (
+			userid
+		);
+
+ALTER TABLE B_COMMENT
+	ADD
+		CONSTRAINT FK_MEMBER_TO_B_COMMENT
+		FOREIGN KEY (
+			userid_fk
+		)
+		REFERENCES MEMBER (
+			userid
+		);
+
+ALTER TABLE B_COMMENT
+	ADD
+		CONSTRAINT FK_BOARD_TO_B_COMMENT
+		FOREIGN KEY (
+			idx_fk
+		)
+		REFERENCES BOARD (
+			idx
+		);
+
+ALTER TABLE MEMBER
+	ADD
+		CONSTRAINT FK_TEAM_TO_MEMBER
+		FOREIGN KEY (
+			team_no_fk
+		)
+		REFERENCES TEAM (
+			team_no
+		);
+
+ALTER TABLE GALLERY
+	ADD
+		CONSTRAINT FK_MEMBER_TO_GALLERY
+		FOREIGN KEY (
+			userid_fk
+		)
+		REFERENCES MEMBER (
+			userid
+		);
+
+ALTER TABLE G_COMMENT
+	ADD
+		CONSTRAINT FK_MEMBER_TO_G_COMMENT
+		FOREIGN KEY (
+			userid_fk
+		)
+		REFERENCES MEMBER (
+			userid
+		);
+
+ALTER TABLE G_COMMENT
+	ADD
+		CONSTRAINT FK_GALLERY_TO_G_COMMENT
+		FOREIGN KEY (
+			gal_idx_fk
+		)
+		REFERENCES GALLERY (
+			gal_idx
+		);
+
+ALTER TABLE AUTHORITIES
+	ADD
+		CONSTRAINT FK_MEMBER_TO_AUTHORITIES
+		FOREIGN KEY (
+			userid
+		)
+		REFERENCES MEMBER (
+			userid
+		);
+
+ALTER TABLE AUTHORITIES
+	ADD
+		CONSTRAINT FK_ROLES_TO_AUTHORITIES
+		FOREIGN KEY (
+			grade
+		)
+		REFERENCES ROLES (
+			grade
+		);
+
+ALTER TABLE BATTER
+	ADD
+		CONSTRAINT FK_TEAM_TO_BATTER
+		FOREIGN KEY (
+			team_no_fk
+		)
+		REFERENCES TEAM (
+			team_no
+		);
+
+ALTER TABLE PITCHER
+	ADD
+		CONSTRAINT FK_TEAM_TO_PITCHER
+		FOREIGN KEY (
+			team_no_fk
+		)
+		REFERENCES TEAM (
+			team_no
+		);
+
+ALTER TABLE TEXTLIVE
+	ADD
+		CONSTRAINT FK_MEMBER_TO_TEXTLIVE
+		FOREIGN KEY (
+			userid_fk
+		)
+		REFERENCES MEMBER (
+			userid
+		);
+
+ALTER TABLE RECORD
+	ADD
+		CONSTRAINT FK_TEXTLIVE_TO_RECORD
+		FOREIGN KEY (
+			gamenum
+		)
+		REFERENCES TEXTLIVE (
+			gamenum
+		);
+		
+		
+		
+-------------테이블 삭제-----------------------------------------
+drop table b_comment;
+drop table g_comment;
+drop table authorities;
+drop table roles;
+drop table record;
+drop table batter;
+drop table pitcher;
+drop table textlive;
+drop table gallery;
+drop table board;
+drop table member;
+drop table team;
+
+--team
+insert into team values(0,'무소속');
+insert into team values(1,'삼성');
+insert into team values(2,'넥센');
+insert into team values(3,'NC');
+insert into team values(4,'LG');
+insert into team values(5,'SK');
+insert into team values(6,'두산');
+insert into team values(7,'롯데');
+insert into team values(8,'KIA');
+insert into team values(9,'한화');
+insert into team values(10,'kt');
+
+commit;
+--
+select * from team;
+
+--member
+insert into member(userid,name,pwd,phone,email,team_no_fk) values('admin','관리자','1004',01012345678, 'admin@naver.com',0);
+insert into member(userid,name,pwd,phone,email,team_no_fk) values('millionsguy','송재환','1004',01092482406, 'millionsguy@naver.com',1);
+insert into member(userid,name,pwd,phone,email,team_no_fk) values('jake','이태현','1004',01012345678, 'admin@naver.com',2);
+
+commit;
+--
+select * from member;
+
+select m.userid, m.name, m.pwd, m.phone, m.email, m.joindate, t.team_name
+from member m join team t
+on m.team_no_fk = t.team_no;
+
+--roles
+insert into roles values(1,'서포터');
+insert into roles values(2,'기록원');
+insert into roles values(3,'매니저');
+insert into roles values(4,'관리자');
+
+commit;
+--
+select * from roles;
+
+insert into authorities(userid, grade) values('admin',4);
+insert into authorities(userid, grade) values('millionsguy',2);
+insert into authorities(userid, grade) values('jake',1);
+
+commit;
+
+select * from authorities;
+
+--authorities
+select m.userid, a.grade
+from member m join authorities a
+on m.userid = a.userid;
+
+--회원과 회원권한 join
+select a.userid, r.authority
+from roles r 
+join (select m.userid, a.grade
+      from member m join authorities a
+      on m.userid = a.userid) a
+on r.grade = a.grade;
+
+--batter
+select * from batter;
+insert into batter(b_backnumber, team_no_fk, b_name, atbat, hit, homerun, battingavg)
+            values(16, 4, '정성훈', 64, 26, 2, 0.406);
+
+--타자정보와 구단 join
+select  t.team_name, b.b_backnumber, b.b_name, b.atbat, b.hit, b.homerun, b.battingavg
+from batter b join team t
+on b.team_no_fk = t.team_no;
+
+--pitcher
+select * from pitcher;
+insert into pitcher(p_backnumber, team_no_fk, p_name, win, lose, save, inning, era)
+            values(54, 8, '양현종', 3, 1, 0, 32.3, 1.95);
+commit;
+--투수정보와 구단 join
+select  t.team_name, p.p_backnumber, p.p_name, p.win, p.lose, p.save, p.inning, p.era
+from pitcher p join team t
+on p.team_no_fk = t.team_no;
+
+select * from textlive;
+insert into textlive(gamenum, bangnum, userid_fk) values(1, 1,'jake');
+commit;
+
+select * from record;
+insert into record(gamenum, inning, r_pitcher, r_batter, goo, goocontent)
+            values(1,11,'양현종', '정성훈', 1, '스트라이크');
+commit;
+--문자중계, 기록 join
+select t.bangnum, r.inning, r.r_pitcher, r.r_batter, r.goo, r.goocontent
+from textlive t join record r
+on t.gamenum = r.gamenum;
+
+
+--1번 문자중계방 참여인원수
+select count(userid_fk) from textlive where bangnum=1;
+
+
+
+
+
+insert into gallery(gal_idx,GAL_CONTENT) values(gal_idx.nextval,'안녕');
+create sequence gal_re_idx;
+select * from gallery
+--**************
+insert into g_reply(gal_re_idx,gal_idx,GAL_re_CONTENT) values(gal_re_idx.nextval,1,'안녕');
+
+select * from g_reply
+
+		

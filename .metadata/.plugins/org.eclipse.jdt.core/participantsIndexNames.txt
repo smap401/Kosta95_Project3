@@ -1,0 +1,13 @@
+INDEX VERSION 1.127
+C:\repository\Kosta95_Project3\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3652242151.index
+\yanolja_boram3\src
+C:\repository\Kosta95_Project3\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4092689754.index
+\yanolja_boram3\src
+C:\repository\Kosta95_Project3\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\453836103.index
+\yanolja_boram3\src
+C:\repository\Kosta95_Project3\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1059689060.index
+\yanolja_boram3\src
+C:\repository\Kosta95_Project3\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2462592089.index
+\yanolja_boram3\src
+C:\repository\Kosta95_Project3\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2656357968.index
+\yanolja_boram3\src

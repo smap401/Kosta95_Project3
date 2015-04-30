@@ -1,0 +1,15 @@
+INDEX VERSION 1.127+C:\repository\Kosta95_Project3\.metadata\.plugins\org.eclipse.jdt.core
+4212717961.index
+1145441331.index
+193725373.index
+2014642076.index
+1351070907.index
+449384428.index
+346393131.index
+2841257252.index
+4237978725.index
+1919828475.index
+303625578.index
+40468972.index
+352555375.index
+3182071994.index
