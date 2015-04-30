@@ -16,68 +16,76 @@ import com.boram3.yanolja.Controller.ActionForward;
 	 static final long serialVersionUID = 1L;
 	 protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
 	 	throws ServletException, IOException {
-		 System.out.print("textlive");
+		 System.out.println("textliveController");
 		 String RequestURI=request.getRequestURI();
 		 String contextPath=request.getContextPath();
 		 String command=RequestURI.substring(contextPath.length());
 		 ActionForward forward=null;
 		 Action action=null;
 		   
-		   if(command.equals("/MemberLogin.me")){
+		   if(command.equals("/TextliveMakeRoom.te")){
 			   forward=new ActionForward();
 			   ////////////////////////////////////////
 			   forward.setRedirect(false); //
 			   //////////////////////////////////////
-			   forward.setPath("./member/loginForm.jsp");
+			   forward.setPath("./textlive/MakeRoom.jsp");
 			   
-		   }else if(command.equals("/MemberJoin.me")){
+		   }else if(command.equals("/TextliveRoom.te")){
 			   forward=new ActionForward();
 			   forward.setRedirect(false);
-			   forward.setPath("./member/joinForm.jsp");
+			   forward.setPath("./textlive/EnterRoom.jsp");
 			   
-		   }else if(command.equals("/TextliveViewPlayerInfoAction.me")){
+		   }else if(command.equals("/TextliveMakeRoomAction.te")){
+			   action = new TextliveMakeRoomAction();
+			   try{
+				   //System.out.println(request.getParameter("user_id_fk"));
+				   forward=action.execute(request, response);
+			   }catch(Exception e){
+				   e.printStackTrace();
+			   }
+		   }else if(command.equals("/TextliveEnterRoom.te")){
+			   forward=new ActionForward();
+			   forward.setRedirect(false);
+			   forward.setPath("./textlive/EnterRoom.jsp");
+			   
+		   }else if(command.equals("/TextliveEnterRoomAction.te")){
+			   action = new TextliveEnterRoomAction();
+			   try{
+				   System.out.println(request.getParameter("bangnum"));
+				   forward=action.execute(request, response);
+			   }catch(Exception e){
+				   e.printStackTrace();
+			   }
+		   }else if(command.equals("/TextliveViewPlayerInfoAction.te")){
 			   action = new TextliveViewPlayerInfoAction();
 			   try{
+				   System.out.println(request.getParameter("teamnumber"));
+				   System.out.println(request.getParameter("backnumber"));
 				   forward=action.execute(request, response);
 			   }catch(Exception e){
 				   e.printStackTrace();
 			   }
-		   }/*else if(command.equals("/MemberLoginAction.me")){
-			   action = new MemberLoginAction();
+		   }else if(command.equals("/TextliveViewRecordAction.te")){
+			   action = new TextliveViewRecordAction();
+			   try{
+				   //System.out.println(request.getParameter("bangnum"));
+				   forward=action.execute(request, response);
+			   }catch(Exception e){
+				   e.printStackTrace();
+			   }
+		   }else if(command.equals("/TextliveMakeRecord.te")){
+			   forward=new ActionForward();
+			   forward.setRedirect(false);
+			   forward.setPath("./textlive/Recoder.jsp");
+			   
+		   }else if(command.equals("/TextliveMakeRecordAction.te")){
+			   action = new TextliveMakeRecordAction();
 			   try{
 				   forward=action.execute(request, response);
 			   }catch(Exception e){
 				   e.printStackTrace();
 			   }
-		   }else if(command.equals("/MemberJoinAction.me")){
-			   action = new MemberJoinAction();
-			   try{
-				   forward=action.execute(request, response);
-			   }catch(Exception e){
-				   e.printStackTrace();
-			   }
-		   }else if(command.equals("/MemberListAction.me")){
-			   action = new MemberListAction();
-			   try{
-				   forward=action.execute(request, response);
-			   }catch(Exception e){
-				   e.printStackTrace();
-			   }
-		   }else if(command.equals("/MemberViewAction.me")){
-			   action = new MemberViewAction();
-			   try{
-				   forward=action.execute(request, response);
-			   }catch(Exception e){
-				   e.printStackTrace();
-			   }
-		   }else if(command.equals("/MemberDeleteAction.me")){
-			   action = new MemberDeleteAction();
-			   try{
-				   forward=action.execute(request, response);
-			   }catch(Exception e){
-				   e.printStackTrace();
-			   }
-		   }*/
+		   }
 		   if(forward != null){
 		   if(forward.isRedirect()){
 			   response.sendRedirect(forward.getPath());
@@ -93,6 +101,7 @@ import com.boram3.yanolja.Controller.ActionForward;
 		throws ServletException, IOException {
 		System.out.println("get");
 		doProcess(request,response);
+		
 	}  	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 

@@ -8,8 +8,16 @@ public class TextliveBatterBean {
 	private int hit;
 	private int homerun;
 	private float battingavg;
+	///////////join data///////////
+	private String team_name;
 	
-	
+	public String getTeam_name() {
+		return team_name;
+	}
+	public void setTeam_name(String team_name) {
+		this.team_name = team_name;
+	}
+	/////////////////////////////////////////
 	public int getB_backnumber() {
 		return b_backnumber;
 	}

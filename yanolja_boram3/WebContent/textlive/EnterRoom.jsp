@@ -8,11 +8,25 @@
 
 </head>
 <body>
-	<a href="Room.jsp" title="1번방"><img src="<%=request.getContextPath()%>/images/1.png"></a>
-	<a href="Room.jsp" title="2번방"><img src="<%=request.getContextPath()%>/images/2.png"></a>
-	<a href="Room.jsp" title="3번방"><img src="<%=request.getContextPath()%>/images/3.png"></a>
-	<a href="Room.jsp" title="4번방"><img src="<%=request.getContextPath()%>/images/4.png"></a>
-	<a href="Room.jsp" title="5번방"><img src="<%=request.getContextPath()%>/images/5.png"></a>
+
+	<a href="./TextliveEnterRoomAction.te?bangnum=1" title="1번방">
+		<img src="<%=request.getContextPath()%>/images/1.png">
+	</a>
 	
+	<a href="./TextliveEnterRoomAction.te?bangnum=2" title="2번방">
+		<img src="<%=request.getContextPath()%>/images/2.png">
+	</a>
+	
+	<a href="./TextliveEnterRoomAction.te?bangnum=3" title="3번방">
+		<img src="<%=request.getContextPath()%>/images/3.png">
+	</a>
+	
+	<a href="./TextliveEnterRoomAction.te?bangnum=4" title="4번방">
+		<img src="<%=request.getContextPath()%>/images/4.png">
+	</a>
+	
+	<a href="./TextliveEnterRoomAction.te?bangnum=5" title="5번방">
+		<img src="<%=request.getContextPath()%>/images/5.png">
+	</a>
 </body>
 </html>

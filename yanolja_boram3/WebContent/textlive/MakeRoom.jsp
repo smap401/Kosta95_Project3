@@ -7,12 +7,38 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="MakeRoom_ok.jsp" method="post">
-		<label>HOME : AWAY</label>
+	<form action="./TextliveMakeRoomAction.te" method="post" name="makeroomform">
+		<label> AWAY : HOME</label>
 		<br>
-		<input type="text" size="2" name="hometeam">&nbsp;
-		<input type="text" size="2" name="awayteam">
-		<select name="roomnumber">
+		<select name="awayteam">
+			<option>선택</option>
+			<option value="1">삼성</option>
+			<option value="2">넥센</option>
+			<option value="3">NC</option>
+			<option value="4">LG</option>
+			<option value="5">SK</option>
+			<option value="6">두산</option>
+			<option value="7">롯데</option>
+			<option value="8">KIA</option>
+			<option value="9">한화</option>
+			<option value="10">kt</option>
+		</select>	
+		
+		<select name="hometeam">
+			<option>선택</option>
+			<option value="1">삼성</option>
+			<option value="2">넥센</option>
+			<option value="3">NC</option>
+			<option value="4">LG</option>
+			<option value="5">SK</option>
+			<option value="6">두산</option>
+			<option value="7">롯데</option>
+			<option value="8">KIA</option>
+			<option value="9">한화</option>
+			<option value="10">kt</option>
+		</select>
+		
+		<select name="bangnum">
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
@@ -20,7 +46,6 @@
 			<option value="5">5</option>
 		</select>		
 		<br>
-		
 		<input type="submit" value="확인">
 		<input type="reset" value="취소">
 	</form>

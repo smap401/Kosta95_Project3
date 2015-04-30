@@ -4,12 +4,7 @@
 <%@ page import="com.boram3.yanolja.DAO.*" %>
 <%@ page import="com.boram3.yanolja.DTO.*" %>
 <%
-	TextliveBatterBean batter = (TextliveBatterBean)request.getAttribute("batter");
-	
-	ServletContext context = getServletContext();
-	String sDownLoadPath =context.getRealPath("boardUpload");
-	
-	//String sFilePath = sDownLoadPath + "\\" + filename;
+	TextliveBatterBean batter = (TextliveBatterBean)request.getAttribute("batterdata");
 %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,6 +14,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<div>
+		<table>
+			<tr>
+			
+				<td><%= batter.getB_backnumber() %></td>
+				<td><%= batter.getB_name() %></td>
+				<td><%= batter.getAtbat() %></td>
+				<td><%= batter.getBattingavg() %></td>
+				<td><%= batter.getHit() %></td>
+			</tr>
+		</table>
+	
+	</div>
 </body>
 </html>
