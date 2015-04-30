@@ -1,5 +1,7 @@
 package com.boram3.yanolja.Gallery.Controller;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,12 +16,25 @@ public class GalleryModifyView implements Action {
 		 	ActionForward forward = new ActionForward();
 		 	request.setCharacterEncoding("utf-8");
 	   		
-			GalleryDAO gallerydao=new GalleryDAO();
-		   GalleryBean gallerydata=new GalleryBean();
+		GalleryDAO gallerydao=new GalleryDAO();
+		GalleryBean gallerydata=new GalleryBean();
 		   	
-			int num=Integer.parseInt(request.getParameter("num"));
+		int num=Integer.parseInt(request.getParameter("num"));
+			
+		boolean usercheck=gallerydao.isGalleryWriter(
+		 				num, request.getParameter("userid"));
+		if(usercheck==false){
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out=response.getWriter();
+		out.println("<script>");
+		out.println("alert('수정할 권한이 없습니다.');");
+		out.println("location.href='./GalleryList.ga';");
+		out.println("</script>");
+		out.close();
+		return null;
+}
 			gallerydata=gallerydao.getDetail(num);
-		   	
+
 		   	if(gallerydata==null){
 		   		System.out.println("(수정)상세보기 실패");
 		   		return null;

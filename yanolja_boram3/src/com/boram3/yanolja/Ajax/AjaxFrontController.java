@@ -14,11 +14,8 @@ import net.sf.json.JSONArray;
 
 import com.boram3.yanolja.Controller.Action;
 import com.boram3.yanolja.Controller.ActionForward;
-import com.boram3.yanolja.DAO.Gal_CommentDAO;
-import com.boram3.yanolja.DAO.Gal_ThumpsupDAO;
-import com.boram3.yanolja.DTO.Gal_CommentBean;
-import com.boram3.yanolja.DTO.Gal_ThumbsupBean;
-
+import com.boram3.yanolja.DAO.*;
+import com.boram3.yanolja.DTO.*;
 //@WebServlet("/DateController")
 public class AjaxFrontController extends HttpServlet {
    private static final long serialVersionUID = 1L;
@@ -93,9 +90,37 @@ public class AjaxFrontController extends HttpServlet {
 		   }catch(Exception e){
 			   e.printStackTrace();}}
 	  /////////GAl_COMMENT WRITE&LIST END/////
-      
-	  
-	  
+
+	  /////////Gallery Modify START/////
+/*	
+	  else if(command.equals("/Gal_Modify.aj")){
+		   try{
+			   PrintWriter out = response.getWriter();
+			   GalleryDAO galdao = new GalleryDAO();
+			   GalleryBean galbean = new GalleryBean();
+			   ArrayList<GalleryBean> gallist = new ArrayList<GalleryBean>();
+			  
+			   boolean usercheck = galdao.isGalleryWriter(Integer.parseInt(request.getParameter("gal_idx")), request.getParameter("userid"));
+			   if(usercheck==false){
+			   		response.setContentType("text/html;charset=utf-8");
+			   		out.println("<script>");
+			   		out.println("alert('�����Ҽ������ϴ�');");
+			   		out.println("location.href='./BoardList.bo';");
+			   		out.println("</script>");
+			   		out.close();
+			 }else{
+			   
+			   galbean.setGal_idx(Integer.parseInt(request.getParameter("gal_idx")));
+			   galbean.setUserid_fk(request.getParameter("userid"));
+			   
+			   
+			   gallist = galdao.galleryModify(galbean);
+			   
+			   JSONArray galcolists= JSONArray.fromObject(galcolist);
+			   response.getWriter().print(galcolists);
+			 }}catch(Exception e){
+			   e.printStackTrace();}}
+*/	  /////////Gallery Modify END/////
 	  
 	  
    }

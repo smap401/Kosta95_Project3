@@ -18,6 +18,23 @@
 %> --%>
 <html>
 <head>
+
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="style/ico/favicon.ico">
+
+    <title>야놀자</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="style/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="style/css/style.css" rel="stylesheet">
+    <link href="style/css/font-awesome.min.css" rel="stylesheet">
+    <link href="style/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+    
 <title>MyPage</title>
 <script>
 function picCheck(){
@@ -59,6 +76,27 @@ function dataCheck(){
 </script>
 </head>
 <body>
+
+<nav class="menu" id="theMenu">
+		<div class="menu-wrap">
+			<h1 class="logo"><a href="MemberLogin.me">LOGIN</a></h1>
+			<i class="fa fa-times menu-close"></i>
+			<a href="BoardList.bo" class="smoothScroll">Board</a>
+			<a href="GalleryList.ga" class="smoothScroll">Gallery</a>
+			<a href="#portfolio" class="smoothScroll">M</a>
+			<a href="#services" class="smoothScroll">Services</a>
+			<a href="MemberMyPage.me" class="smoothScroll">Mypage</a>
+			<a href="#"><i class="fa fa-facebook"></i></a>
+			<a href="#"><i class="fa fa-twitter"></i></a>
+			<a href="#"><i class="fa fa-dribbble"></i></a>
+			<a href="#"><i class="fa fa-envelope"></i></a>
+		</div>
+		
+		<!-- Menu button -->
+		<div id="menuToggle"><i class="fa fa-bars"></i></div>
+	</nav>
+
+
 <center>
 <%-- <form name="updateform" action="./MemberUpdateAction.me" method="post" enctype="multipart/form-data">
 <table border=1 width=500>
@@ -231,7 +269,17 @@ function dataCheck(){
 	</tr>
 	</form>
 </table>
-
 </center>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="style/js/classie.js"></script>
+    <script src="style/js/bootstrap.min.js"></script>
+    <script src="style/js/smoothscroll.js"></script>
+	<script src="style/js/jquery.stellar.min.js"></script>
+	<script src="style/js/fancybox/jquery.fancybox.js"></script>    
+	<script src="style/js/main.js"></script>	
+
 </body>
 </html>

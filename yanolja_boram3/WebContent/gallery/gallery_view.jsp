@@ -32,12 +32,12 @@ $(function(){
 		error: function(Data){alert("error발생");}
 		});
 	return false;
-
+});
 	////COMMENT LIST 출력 비동기 END//////////
 	
 	
 	////THUMB INSERT와 THUMBSNUM 출력 비동기 START//////////////////
-
+$(function(){
 	$('#thumbs').click(function(){
         var thumb= {
         		gal_idx : $('#gal_idx').val(),
@@ -95,36 +95,6 @@ $(function(){
 ////GAL_COMMENT 생성 비동기 END///////////////////
 
 
-$(function(){	
-	$('#gal_co_submit').click(function(){
-		
-        var galcowrite= {
-        		gal_co_content : $('#gal_co_content').val(),
-        		userid : $('#userid').val(),
-        		gal_idx : $('#gal_idx').val()
-        };
-        $.ajax({
-    		type:"POST",
-    		url:"Gal_Co_Write.aj",
-    		data: galcowrite,
-    		dataType:"html",
-    		success: function(responseData){
-                var output = "";
-                var galcodata = JSON.parse(responseData);
-                $.each(galcodata,function(index,items){
-                	output+="<tr><td>작성자</td><td>내용</td></tr>"+
-                		"<tr><td>"+items.userid_fk+"</td><td>"+items.gal_co_content+"</td></tr>"
-                });
-                $("#gal_co_list").html(output);
-    			}
-    		});
-    	return false;
-	});
-});	
-	
-	
-	
-	
 </script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -177,7 +147,8 @@ $(function(){
 	
 <!-- COMMENT LIST 출력단 END-->	
 
-	<input type="button" id="galmodify" name="galmodify" value="수정">
+	<a href="./GalleryModify.ga?num=<%=gallery.getGal_idx() %>">수정</a>
+	
 	<a href="./GalleryDeleteAction.ga?num=<%=gallery.getGal_idx() %>">삭제</a>
 	<hr>
 	<a href="./GalleryDetailAction.ga?num=<%=gallery.getGal_idx()-1%>">이전</a>&nbsp;&nbsp;&nbsp;&nbsp;

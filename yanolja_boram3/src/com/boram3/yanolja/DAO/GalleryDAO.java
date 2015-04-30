@@ -26,13 +26,13 @@ public class GalleryDAO {
 	  	ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 	  	
 		}catch(Exception ex){
-			System.out.println("DB 연결 실패 : " + ex);
+			System.out.println("DB �뿰寃� �떎�뙣 : " + ex);
 			return;
 		}
 	}
 	
 	
-	//Gallery 등록.
+	//Gallery �벑濡�.
 	public boolean galleryInsert(GalleryBean gallery){
 		int num =0;
 		String sql="";
@@ -65,7 +65,7 @@ public class GalleryDAO {
 			
 			return true;
 		}catch(Exception ex){
-			System.out.println("galleryInsert 에러 : "+ex);
+			System.out.println("galleryInsert �뿉�윭 : "+ex);
 		}finally{
 			if(rs!=null) try{rs.close();}catch(SQLException ex){}
 			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){}
@@ -74,7 +74,7 @@ public class GalleryDAO {
 		return false;
 	}
 	
-	//Gallery 목록
+	//Gallery 紐⑸줉
 	
 	public List getGalleryList(){
 		String gallery_list_sql="select * from gallery order by gal_writedate asc";
@@ -101,7 +101,7 @@ public class GalleryDAO {
 			return list;
 			
 		}catch(Exception ex){
-			System.out.println("getGalleryList 에러 : " + ex);
+			System.out.println("getGalleryList �뿉�윭 : " + ex);
 		}finally{
 			if(rs!=null) try{rs.close();}catch(SQLException ex){}
 			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){}
@@ -134,7 +134,7 @@ public class GalleryDAO {
 			}
 			return gallery;
 		}catch(Exception ex){
-			System.out.println("getDetail 에러 : " + ex);
+			System.out.println("getDetail �뿉�윭 : " + ex);
 		}finally{
 			if(rs!=null)try{rs.close();}catch(SQLException ex){}
 			if(pstmt !=null)try{pstmt.close();}catch(SQLException ex){}
@@ -143,7 +143,7 @@ public class GalleryDAO {
 		return null;
 	}
 	
-	//Gallery 수정.
+	//Gallery �닔�젙.
 	public boolean galleryModify(GalleryBean modifygallery) throws Exception{
 		String sql="update GALLERY set gal_content=?";
 		sql+="where gal_idx=?";
@@ -156,7 +156,7 @@ public class GalleryDAO {
 			pstmt.executeUpdate();
 			return true;
 		}catch(Exception ex){
-			System.out.println("galleryModify 에러 : " + ex);
+			System.out.println("galleryModify �뿉�윭 : " + ex);
 		}finally{
 			if(rs!=null)try{rs.close();}catch(SQLException ex){}
 			if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
@@ -165,7 +165,7 @@ public class GalleryDAO {
 		return false;
 	}
 	
-	//Gallery 삭제.
+	//Gallery �궘�젣.
 		public boolean galleryDelete(int num){
 			String gallery_delete_sql=
 				"delete from GALLERY where gal_idx=?";
@@ -181,7 +181,7 @@ public class GalleryDAO {
 				
 				return true;
 			}catch(Exception ex){
-				System.out.println("gallery Delete 에러 : "+ex);
+				System.out.println("gallery Delete �뿉�윭 : "+ex);
 			}finally{
 				try{
 					if(pstmt!=null)pstmt.close();
@@ -193,7 +193,7 @@ public class GalleryDAO {
 		}
 	
 	
-	//글쓴이인지 확인.
+	//湲��벖�씠�씤吏� �솗�씤.
 	public boolean isGalleryWriter(int num,String userid){
 		System.out.println("id="+userid);
 		String gallery_sql=
@@ -209,7 +209,7 @@ public class GalleryDAO {
 				return true;
 			}
 		}catch(SQLException ex){
-			System.out.println("isGalleryWriter 에러 : "+ex);
+			System.out.println("isGalleryWriter �뿉�윭 : "+ex);
 		}
 		finally{
 			try{
